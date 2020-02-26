@@ -16,6 +16,16 @@
  create table policyDetails(policyNumber number(10),foreign key(policyNumber) references policy(policyNumber),question_Id varchar2(15),
  foreign key(question_Id) references policyQuestions(pol_Ques_Id),answer varchar2(30));
  
+ create table premiums(PRE_NO number(8) primary key, PRE_ANS_WEIGHTAGE_MIN number(8), PRE_ANS_WEIGHTAGE_MAX number(8), PRE_AMT number(8));
+ 
+  insert into premiums values(1,1800,2001,100000);
+ insert into premiums values(2,2001,2001,150000);
+ 
+ create sequence policy_number start with 1 increment by 1 minvalue 1;
+ 
+ alter table policy modify(policypremium number(15,3));
+ 
+ 
  /*desc policyquestions;
  Name                                      Null?    Type
  ----------------------------------------- -------- ----------------------------
