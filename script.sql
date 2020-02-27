@@ -7,7 +7,9 @@
   insuredZip number(5),businessSegmentId varchar2(30), foreign key(businessSegmentId)  references businessSegment(bus_Seg_Id),userName varchar2(20), 
   foreign key(userName) references userRole(userName));
 
- create table policy(policyNumber number(10) primary key,policyPremium decimal(8,3),accountNumber number(10), foreign key(accountNumber) references accounts(accountNumber));
+create sequence account_number start with 1 increment by 1;
+
+ create table policy(policyNumber number(10) primary key,policyPremium decimal(15,3),accountNumber number(10), foreign key(accountNumber) references accounts(accountNumber));
 
  create table policyQuestions(pol_Ques_Id varchar2(10) primary key,pol_Ques_Seq number(3),bus_Seg_Id varchar2(30), foreign key(bus_Seg_Id) references businessSegment(bus_Seg_Id),
  pol_Ques_Desc varchar2(80),pol_Ques_Ans1 varchar2(30),pol_Ques_Ans1_weightage number(5),pol_Ques_Ans2 varchar2(30),pol_Ques_Ans2_weightage number(5),pol_Ques_Ans3 varchar2(30),
@@ -16,15 +18,9 @@
  create table policyDetails(policyNumber number(10),foreign key(policyNumber) references policy(policyNumber),question_Id varchar2(15),
  foreign key(question_Id) references policyQuestions(pol_Ques_Id),answer varchar2(30));
  
- create table premiums(PRE_NO number(8) primary key, PRE_ANS_WEIGHTAGE_MIN number(8), PRE_ANS_WEIGHTAGE_MAX number(8), PRE_AMT number(8));
- 
-  insert into premiums values(1,1800,2001,100000);
- insert into premiums values(2,2001,2001,150000);
- 
  create sequence policy_number start with 1 increment by 1 minvalue 1;
  
- alter table policy modify(policypremium number(15,3));
- 
+ create table premiums(PRE_NO number(8) primary key, PRE_ANS_WEIGHTAGE_MIN number(8), PRE_ANS_WEIGHTAGE_MAX number(8), PRE_AMT number(8));
  
  /*desc policyquestions;
  Name                                      Null?    Type
@@ -79,3 +75,11 @@ insert into policyQuestions values('RQ7',7, 'R02', 'Equipment Breakdown', 'upto 
 insert into policyQuestions values('RQ8',8, 'R02', 'Liability Covergae', '10000 to 15000', 200, '15001 to 30000', 400, 'More than 30000', 600);
 
  insert into policyQuestions values('RQ9',9, 'R02', 'Body Injury', 'upto 25000', 200, '25001 to 50000', 400, 'More than 50000', 600);
+ 
+ 
+ 
+ insert into premiums values(2,2001,2001,150000);
+ 
+ insert into premiums values(1,2001,2001,150000);
+ 
+ insert into premiums values(1,1800,2001,100000);
